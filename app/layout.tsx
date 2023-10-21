@@ -5,7 +5,11 @@ import { createApi } from "unsplash-js";
 import { Random } from "unsplash-js/dist/methods/photos/types";
 import { Clock } from "@/components/Clock";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "next/link";
+import { Providers } from "./providers";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
+import { Button } from "@nextui-org/button";
+import { Link } from "@nextui-org/link";
 
 export const revalidate = 0;
 
@@ -44,57 +48,72 @@ export default async function RootLayout({
 }) {
   const image = await getRandomImage();
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={inter.className}>
-        <div className="fixed h-screen w-screen overflow-hidden -z-10">
-          <Image
-            alt="Background image"
-            src={image.imageUrl}
-            quality={100}
-            fill
-            sizes="100vw"
-            style={{
-              objectFit: "cover",
-            }}
-          />
-        </div>
-        <div className="w-full text-white flex justify-between px-6 py-3 bg-black/50 flex-wrap-reverse items-center">
-          <div className="flex gap-4">
-            <Link href="/login">Login</Link>
-            <Link href="/movies">Movies</Link>
+        <Providers>
+          <div className="fixed h-screen w-screen overflow-hidden -z-10">
+            <Image
+              alt="Background image"
+              src={image.imageUrl}
+              quality={100}
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+              }}
+            />
           </div>
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex flex-col">
-              <span className="text-xl">{image.locationName ?? ""}</span>
-              <span className="text-xs italic">
-                Photo by{" "}
-                <a
-                  href={`https://unsplash.com/@${image.username}?utm_source=home-app-theofournier&utm_medium=referral`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline"
+          <Navbar maxWidth="full">
+            <NavbarContent className="gap-4" justify="center">
+              <NavbarItem>
+                <Button
+                  as={NextLink}
+                  color="primary"
+                  href="/login"
+                  variant="shadow"
                 >
-                  {image.usernameFull}
-                </a>{" "}
-                on{" "}
-                <a
-                  href="https://unsplash.com/?utm_source=home-app-theofournier&utm_medium=referral"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline"
-                >
-                  Unsplash
-                </a>
-              </span>
-            </div>
-            <div>
-              <Link href="/">
+                  Login
+                </Button>
+              </NavbarItem>
+              <NavbarItem>
+                <Link as={NextLink} color="foreground" href="/movies">
+                  Movies
+                </Link>
+              </NavbarItem>
+            </NavbarContent>
+            <NavbarContent justify="end">
+              <NavbarItem>
+                <div className="flex flex-col">
+                  <span className="text-xl">{image.locationName ?? ""}</span>
+                  <span className="text-xs italic">
+                    Photo by{" "}
+                    <a
+                      href={`https://unsplash.com/@${image.username}?utm_source=home-app-theofournier&utm_medium=referral`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      {image.usernameFull}
+                    </a>{" "}
+                    on{" "}
+                    <a
+                      href="https://unsplash.com/?utm_source=home-app-theofournier&utm_medium=referral"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      Unsplash
+                    </a>
+                  </span>
+                </div>
+              </NavbarItem>
+              <NextLink href="/">
                 <Clock />
-              </Link>
-            </div>
-          </div>
-        </div>
-        {children}
+              </NextLink>
+            </NavbarContent>
+          </Navbar>
+          {children}
+        </Providers>
       </body>
     </html>
   );
