@@ -10,6 +10,7 @@ import { Providers } from "./providers";
 import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
+import { getSession } from "@/lib/supabase-server";
 
 export const revalidate = 0;
 
@@ -47,6 +48,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const image = await getRandomImage();
+  const session = await getSession();
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
@@ -65,21 +67,34 @@ export default async function RootLayout({
           </div>
           <Navbar maxWidth="full">
             <NavbarContent className="gap-4" justify="center">
-              <NavbarItem>
-                <Button
-                  as={NextLink}
-                  color="primary"
-                  href="/login"
-                  variant="shadow"
-                >
-                  Login
-                </Button>
-              </NavbarItem>
-              <NavbarItem>
-                <Link as={NextLink} color="foreground" href="/movies">
-                  Movies
-                </Link>
-              </NavbarItem>
+              {!session && (
+                <NavbarItem>
+                  <Button
+                    as={NextLink}
+                    color="primary"
+                    href="/login"
+                    variant="shadow"
+                  >
+                    Login
+                  </Button>
+                </NavbarItem>
+              )}
+              {session && (
+                <>
+                  <NavbarItem>
+                    <form action="/api/auth/sign-out" method="post">
+                      <Button type="submit" color="danger" variant="flat">
+                        Logout
+                      </Button>
+                    </form>
+                  </NavbarItem>
+                  <NavbarItem>
+                    <Link as={NextLink} color="foreground" href="/movies">
+                      Movies
+                    </Link>
+                  </NavbarItem>
+                </>
+              )}
             </NavbarContent>
             <NavbarContent justify="end">
               <NavbarItem>
