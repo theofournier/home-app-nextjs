@@ -14,10 +14,10 @@ export const Clock = () => {
 
   return (
     <div className="flex flex-col">
-      <span className="text-white text-4xl" suppressHydrationWarning>
+      <span className="text-white text-2xl" suppressHydrationWarning>
         {datetime.toLocaleTimeString()}
       </span>
-      <span className="text-white text-2xl" suppressHydrationWarning>
+      <span className="text-white text-lg" suppressHydrationWarning>
         {datetime.toLocaleDateString()}
       </span>
     </div>
