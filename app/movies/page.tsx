@@ -1,12 +1,12 @@
-import { getSession } from "@/lib/supabase-server";
-import { redirect } from "next/navigation";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 export default async function Login() {
-  const session = await getSession();
-
-  if (!session) {
-    return redirect("/login");
-  }
-
-  return <span>MOVIES</span>;
+  return (
+    <div>
+      <Button as={Link} href="/movies/search">
+        Search
+      </Button>
+    </div>
+  );
 }

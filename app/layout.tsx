@@ -11,9 +11,9 @@ import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { getSession } from "@/lib/supabase-server";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/tooltip";
 
-export const revalidate = 0;
+//export const revalidate = 0;
 
 const unsplash = createApi({
   accessKey: process.env.UNSPLASH_API_KEY,
