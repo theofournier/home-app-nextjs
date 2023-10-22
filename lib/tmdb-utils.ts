@@ -18,7 +18,7 @@ export const fetchTmdb = async <T>(path: string): Promise<T | null> => {
 
 export const getTmdbImageUrl = (
   path: string,
-  size: TmdbImageSize = "w500"
+  size: TmdbImageSize = "w185"
 ): string => {
   return `https://image.tmdb.org/t/p/${size}/${path}`;
 };

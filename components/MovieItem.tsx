@@ -4,6 +4,7 @@ import NextImage from "next/image";
 import { MovieFavorite } from "./MovieFavorite";
 import { MovieWatch } from "./MovieWatch";
 import { ImageOffOutline } from "./ImageOffOutline";
+import Link from "next/link";
 
 type Props = {
   movie: MovieType;
@@ -17,9 +18,11 @@ export const MovieItem = ({ movie }: Props) => {
       shadow="sm"
       key={movie.id}
     >
-      <CardHeader className="absolute z-10 justify-end gap-1">
-        <MovieFavorite movie={movie} />
-        <MovieWatch movie={movie} />
+      <CardHeader className="absolute z-10 justify-end p-0">
+        <div className="flex flex-row  gap-1 bg-background/50 p-2 rounded-es-lg">
+          <MovieFavorite movie={movie} />
+          <MovieWatch movie={movie} />
+        </div>
       </CardHeader>
       <CardBody className="p-0 h-[300px] justify-center items-center">
         {movie.imageUrl ? (
@@ -36,7 +39,13 @@ export const MovieItem = ({ movie }: Props) => {
           <ImageOffOutline width={50} height={50} />
         )}
       </CardBody>
-      <CardFooter className="flex flex-col items-start p-2">
+      <CardFooter
+        as={Link}
+        href={`https://themoviedb.org/${movie.mediaType}/${movie.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex flex-col items-start p-2"
+      >
         <span className="text-sm font-bold">{movie.title}</span>
         <span className="text-xs">{movie.releaseDate}</span>
       </CardFooter>
