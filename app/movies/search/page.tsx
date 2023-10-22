@@ -1,12 +1,17 @@
 import { fetchTmdb, getTmdbImageUrl } from "@/lib/tmdb-utils";
-import { TmdbFindIdResponse, TmdbListResponse } from "@/lib/types";
+import {
+  MovieType,
+  SearchParams,
+  TmdbFindIdResponse,
+  TmdbListResponse,
+  TmdbResult,
+} from "@/lib/types";
 import { MovieGrid } from "@/components/MovieGrid";
 import Image from "next/image";
 import { Input } from "@nextui-org/input";
-import { Card, CardBody } from "@nextui-org/card";
-import { Button } from "@nextui-org/button";
 import { SearchIcon } from "@/components/SearchIcon";
 import { redirect } from "next/navigation";
+import { FindIdComponent } from "./FindIdComponent";
 
 const getTrending = async () => {
   const res = await fetchTmdb<TmdbListResponse>("/trending/all/week");
@@ -23,23 +28,49 @@ const getFindId = async (externalId: string, externalSource = "imdb_id") => {
   return res;
 };
 
+const getMovies = async (
+  searchParams: SearchParams
+): Promise<MovieType[] | null> => {
+  const searchQuery = searchParams["query"] as string;
+  const externalSource = searchParams["externalSource"] as string;
+  const externalId = searchParams["externalId"] as string;
+
+  let tmdbMovies: TmdbResult[] = [];
+
+  if (searchQuery) {
+    const movies = await getSearch(searchQuery);
+    if (!movies || movies.results.length === 0) return null;
+    tmdbMovies = movies.results;
+  } else if (externalSource && externalId) {
+    const movies = await getFindId(externalId, externalSource);
+    if (!movies) return null;
+    tmdbMovies = [...movies.movie_results, ...movies.tv_results];
+  } else {
+    const movies = await getTrending();
+    if (!movies || movies.results.length === 0) return null;
+    tmdbMovies = movies.results;
+  }
+
+  return tmdbMovies
+    .filter((movie) => ["movie", "tv"].includes(movie.media_type))
+    .map((res) => ({
+      id: res.id,
+      imageUrl: res.poster_path ? getTmdbImageUrl(res.poster_path) : undefined,
+      mediaType: res.media_type,
+      releaseDate: res.release_date ?? res.first_air_date ?? "",
+      title: res.title ?? res.name ?? "",
+    }));
+};
+
 export default async function Search({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: SearchParams;
 }) {
   const searchQuery = searchParams["query"] as string;
-  const movies = searchQuery
-    ? await getSearch(searchQuery)
-    : await getTrending();
-
-  if (!movies || movies.results.length === 0) {
-    return (
-      <div>
-        <span>No results</span>
-      </div>
-    );
-  }
+  const externalSource = searchParams["externalSource"] as string;
+  const externalId = searchParams["externalId"] as string;
+  const movies = await getMovies(searchParams);
 
   const search = async (formData: FormData) => {
     "use server";
@@ -51,6 +82,21 @@ export default async function Search({
     }
 
     redirect(`/movies/search?query=${query}`);
+  };
+
+  const findId = async (formData: FormData) => {
+    "use server";
+
+    const externalSource = formData.get("externalSource");
+    const externalId = formData.get("externalId");
+
+    if (!externalId || !externalSource) {
+      redirect("/movies/search");
+    }
+
+    redirect(
+      `/movies/search?externalSource=${externalSource}&externalId=${externalId}`
+    );
   };
 
   return (
@@ -85,27 +131,21 @@ export default async function Search({
           </div>
         </div>
         <div className="ml-2">
-          <Card isBlurred shadow="sm">
-            <CardBody className="p-2">
-              <Button color="primary">Look for a specific ID</Button>
-            </CardBody>
-          </Card>
+          <FindIdComponent
+            findIdAction={findId}
+            externalId={externalId}
+            externalSource={externalSource}
+          />
         </div>
       </div>
 
-      <MovieGrid
-        movies={movies.results
-          .filter((movie) => ["movie", "tv"].includes(movie.media_type))
-          .map((res) => ({
-            id: res.id,
-            imageUrl: res.poster_path
-              ? getTmdbImageUrl(res.poster_path)
-              : undefined,
-            mediaType: res.media_type,
-            releaseDate: res.release_date ?? res.first_air_date ?? "",
-            title: res.title ?? res.name ?? "",
-          }))}
-      />
+      {!movies || movies.length === 0 ? (
+        <div>
+          <span>No results</span>
+        </div>
+      ) : (
+        <MovieGrid movies={movies} />
+      )}
     </div>
   );
 }

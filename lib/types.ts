@@ -36,3 +36,5 @@ export type MovieType = {
   releaseDate: string;
   title: string;
 };
+
+export type SearchParams = { [key: string]: string | string[] | undefined };
