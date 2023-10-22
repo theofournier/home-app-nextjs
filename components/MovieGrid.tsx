@@ -8,7 +8,7 @@ type Props = {
 export const MovieGrid = ({ movies }: Props) => {
   return (
     <div
-      className="p-10 gap-2 grid items-center"
+      className="px-10 py-3 gap-2 grid items-center"
       style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}
     >
       {movies.map((movie) => (

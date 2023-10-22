@@ -1,8 +1,8 @@
-import { getTmdbImageUrl } from "@/lib/tmdb-utils";
 import { MovieType } from "@/lib/types";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import NextImage from "next/image";
 import { MovieFavorite } from "./MovieFavorite";
+import { MovieWatch } from "./MovieWatch";
 
 type Props = {
   movie: MovieType;
@@ -16,9 +16,9 @@ export const MovieItem = ({ movie }: Props) => {
       shadow="sm"
       key={movie.id}
     >
-      <CardHeader className="absolute z-10 justify-end">
-        {/* @ts-expect-error Server Component */}
+      <CardHeader className="absolute z-10 justify-end gap-1">
         <MovieFavorite movie={movie} />
+        <MovieWatch movie={movie} />
       </CardHeader>
       <CardBody className="p-0 h-[300px]">
         <NextImage
