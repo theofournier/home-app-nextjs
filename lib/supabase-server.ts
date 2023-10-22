@@ -3,11 +3,11 @@ import { cookies } from "next/headers";
 import { Database } from "./supabase.schema";
 import { cache } from "react";
 
-export const createServerSupabaseClient = () =>
-  createServerComponentClient<Database>({ cookies });
-
 export async function getSession() {
-  const supabase = createServerSupabaseClient();
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient<Database>({
+    cookies: () => cookieStore,
+  });
   try {
     const {
       data: { session },
@@ -25,7 +25,10 @@ export const getUserMovieFavorites = cache(async () => {
   if (!session) {
     return null;
   }
-  const supabase = createServerSupabaseClient();
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient<Database>({
+    cookies: () => cookieStore,
+  });
 
   const { data, error } = await supabase
     .from("movie_favorites")
