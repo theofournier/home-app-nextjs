@@ -11,6 +11,7 @@ import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import { getSession } from "@/lib/supabase-server";
+import { Tooltip } from "@nextui-org/react";
 
 export const revalidate = 0;
 
@@ -98,33 +99,40 @@ export default async function RootLayout({
             </NavbarContent>
             <NavbarContent justify="end">
               <NavbarItem>
-                <div className="flex flex-col">
-                  <span className="text-xl">{image.locationName ?? ""}</span>
-                  <span className="text-xs italic">
-                    Photo by{" "}
-                    <a
-                      href={`https://unsplash.com/@${image.username}?utm_source=home-app-theofournier&utm_medium=referral`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      {image.usernameFull}
-                    </a>{" "}
-                    on{" "}
-                    <a
-                      href="https://unsplash.com/?utm_source=home-app-theofournier&utm_medium=referral"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      Unsplash
-                    </a>
-                  </span>
-                </div>
+                <Tooltip
+                  content={
+                    <div className="flex flex-col">
+                      <span className="text-xl">
+                        {image.locationName ?? ""}
+                      </span>
+                      <span className="text-xs italic">
+                        Photo by{" "}
+                        <a
+                          href={`https://unsplash.com/@${image.username}?utm_source=home-app-theofournier&utm_medium=referral`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline"
+                        >
+                          {image.usernameFull}
+                        </a>{" "}
+                        on{" "}
+                        <a
+                          href="https://unsplash.com/?utm_source=home-app-theofournier&utm_medium=referral"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline"
+                        >
+                          Unsplash
+                        </a>
+                      </span>
+                    </div>
+                  }
+                >
+                  <NextLink href="/">
+                    <Clock />
+                  </NextLink>
+                </Tooltip>
               </NavbarItem>
-              <NextLink href="/">
-                <Clock />
-              </NextLink>
             </NavbarContent>
           </Navbar>
           {children}
