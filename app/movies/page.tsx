@@ -2,6 +2,7 @@ import { MovieGrid } from "@/components/MovieGrid";
 import { getUserMovieFavorites } from "@/lib/supabase-server";
 import { MovieType } from "@/lib/types";
 import { Button } from "@nextui-org/button";
+import { Card, CardBody } from "@nextui-org/card";
 import Link from "next/link";
 
 export default async function Movies() {
@@ -34,9 +35,20 @@ export default async function Movies() {
 
   return (
     <div>
-      <Button as={Link} href="/movies/search">
-        Search
-      </Button>
+      <div className="px-10 py-4">
+        <Card isBlurred shadow="sm">
+          <CardBody>
+            <div className="flex gap-2 items-center">
+              <span className="text-lg font-medium">
+                Looking for new movies or TV series to watch?
+              </span>
+              <Button as={Link} href="/movies/search" color="primary">
+                Go to search
+              </Button>
+            </div>
+          </CardBody>
+        </Card>
+      </div>
       {!groupMovies ? (
         <div>
           <span>No favorites</span>

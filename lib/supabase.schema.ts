@@ -13,7 +13,7 @@ export interface Database {
         Row: {
           created_at: string;
           id: string;
-          image_url: string;
+          image_url: string | null;
           is_favorite: boolean;
           is_watched: boolean;
           media_type: string;
@@ -25,7 +25,7 @@ export interface Database {
         Insert: {
           created_at?: string;
           id?: string;
-          image_url: string;
+          image_url?: string | null;
           is_favorite?: boolean;
           is_watched?: boolean;
           media_type: string;
@@ -37,7 +37,7 @@ export interface Database {
         Update: {
           created_at?: string;
           id?: string;
-          image_url?: string;
+          image_url?: string | null;
           is_favorite?: boolean;
           is_watched?: boolean;
           media_type?: string;

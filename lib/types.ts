@@ -4,7 +4,7 @@ export type TmdbResult = {
   name?: string; // tv
   first_air_date?: string; // tv
   release_date?: string; // movie
-  poster_path: string;
+  poster_path?: string;
   media_type: "movie" | "tv";
 };
 
@@ -26,7 +26,7 @@ export type TmdbImageSize =
 
 export type MovieType = {
   id: number;
-  imageUrl: string;
+  imageUrl?: string | null;
   mediaType: string;
   releaseDate: string;
   title: string;
