@@ -12,5 +12,5 @@ export default async function MoviesLayout({
     return redirect("/login");
   }
 
-  return <>{children}</>;
+  return <div className="px-5 sm:px-10 py-4">{children}</div>;
 }

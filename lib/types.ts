@@ -15,6 +15,11 @@ export type TmdbListResponse = {
   total_results: number;
 };
 
+export type TmdbFindIdResponse = {
+  tv_results: TmdbResult[];
+  movie_results: TmdbResult[];
+};
+
 export type TmdbImageSize =
   | "w92"
   | "w154"

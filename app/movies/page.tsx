@@ -1,4 +1,5 @@
 import { MovieGrid } from "@/components/MovieGrid";
+import { MovieSectionTitle } from "@/components/MovieSectionTitle";
 import { getUserMovieFavorites } from "@/lib/supabase-server";
 import { MovieType } from "@/lib/types";
 import { Button } from "@nextui-org/button";
@@ -34,11 +35,11 @@ export default async function Movies() {
   );
 
   return (
-    <div>
-      <div className="px-10 py-4">
+    <div className="flex flex-col gap-4">
+      <div className="flex">
         <Card isBlurred shadow="sm">
           <CardBody>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center flex-wrap">
               <span className="text-lg font-medium">
                 Looking for new movies or TV series to watch?
               </span>
@@ -54,32 +55,20 @@ export default async function Movies() {
           <span>No favorites</span>
         </div>
       ) : (
-        <div>
-          <div>
-            <div className="w-full px-10">
-              <div className="rounded-full p-2 bg-background/50 backdrop-blur-md backdrop-saturate-150 text-center">
-                <span className="text-xl font-semibold">Watchlist</span>
-              </div>
-            </div>
+        <>
+          <div className="flex flex-col gap-2">
+            <MovieSectionTitle title="Watchlist" />
             <MovieGrid movies={groupMovies?.favorites} />
           </div>
           <div>
-            <div className="w-full px-10">
-              <div className="rounded-full p-2 bg-background/50 backdrop-blur-md backdrop-saturate-150 text-center">
-                <span className="text-xl font-semibold">Already watched</span>
-              </div>
-            </div>
+            <MovieSectionTitle title="Already watched" />
             <MovieGrid movies={groupMovies?.watched} />
           </div>
           <div>
-            <div className="w-full px-10">
-              <div className="rounded-full p-2 bg-background/50 backdrop-blur-md backdrop-saturate-150 text-center">
-                <span className="text-xl font-semibold">Others</span>
-              </div>
-            </div>
+            <MovieSectionTitle title="Removed" />
             <MovieGrid movies={groupMovies?.others} />
           </div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import { fetchTmdb, getTmdbImageUrl } from "@/lib/tmdb-utils";
-import { TmdbListResponse } from "@/lib/types";
+import { TmdbFindIdResponse, TmdbListResponse } from "@/lib/types";
 import { MovieGrid } from "@/components/MovieGrid";
 import Image from "next/image";
 import { Input } from "@nextui-org/input";
@@ -14,6 +14,12 @@ const getTrending = async () => {
 };
 const getSearch = async (query: string) => {
   const res = await fetchTmdb<TmdbListResponse>(`/search/multi?query=${query}`);
+  return res;
+};
+const getFindId = async (externalId: string, externalSource = "imdb_id") => {
+  const res = await fetchTmdb<TmdbFindIdResponse>(
+    `/find/${externalId}?external_source=${externalSource}`
+  );
   return res;
 };
 
@@ -41,15 +47,15 @@ export default async function Search({
     const query = formData.get("query");
 
     if (!query) {
-      return;
+      redirect("/movies/search");
     }
 
     redirect(`/movies/search?query=${query}`);
   };
 
   return (
-    <div>
-      <div className="px-10 py-3 sticky top-16 z-10 flex">
+    <div className="flex flex-col gap-4">
+      <div className="sticky top-16 z-10 flex">
         <div className="flex flex-col flex-grow">
           <form action={search}>
             <Input
@@ -63,8 +69,7 @@ export default async function Search({
               }
             />
           </form>
-          <div className="flex flex-row gap-1 mt-1 justify-end">
-            <span className="text-xs">Using</span>
+          <div className="flex flex-row mt-1 justify-end">
             <a
               href="https://www.themoviedb.org/"
               target="_blank"
