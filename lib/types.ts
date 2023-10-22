@@ -1,5 +1,5 @@
 export type TmdbResult = {
-  id: string;
+  id: number;
   title?: string; // movie
   name?: string; // tv
   first_air_date?: string; // tv
@@ -23,3 +23,11 @@ export type TmdbImageSize =
   | "w500"
   | "w780"
   | "original";
+
+export type MovieType = {
+  id: number;
+  imageUrl: string;
+  mediaType: string;
+  releaseDate: string;
+  title: string;
+};

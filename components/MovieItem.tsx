@@ -1,26 +1,29 @@
 import { getTmdbImageUrl } from "@/lib/tmdb-utils";
-import { TmdbResult } from "@/lib/types";
-import { Card, CardBody, CardFooter } from "@nextui-org/card";
+import { MovieType } from "@/lib/types";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import NextImage from "next/image";
+import { MovieFavorite } from "./MovieFavorite";
 
 type Props = {
-  item: TmdbResult;
+  movie: MovieType;
 };
 
-export const MovieItem = ({ item }: Props) => {
-  const title = item.title ?? item.name;
-  const date = item.release_date ?? item.first_air_date;
+export const MovieItem = ({ movie }: Props) => {
   return (
     <Card
       isBlurred
-      className="bg-transparent h-[300px] w-[200px] m-auto"
+      className="bg-transparent w-[200px] mx-auto"
       shadow="sm"
-      key={item.id}
+      key={movie.id}
     >
-      <CardBody className="p-0">
+      <CardHeader className="absolute z-10 justify-end">
+        {/* @ts-expect-error Server Component */}
+        <MovieFavorite movie={movie} />
+      </CardHeader>
+      <CardBody className="p-0 h-[300px]">
         <NextImage
-          alt={title ?? "Movie image"}
-          src={getTmdbImageUrl(item.poster_path)}
+          alt={movie.title ?? "Movie image"}
+          src={movie.imageUrl}
           fill
           sizes="100vw"
           style={{
@@ -29,8 +32,8 @@ export const MovieItem = ({ item }: Props) => {
         />
       </CardBody>
       <CardFooter className="flex flex-col items-start p-2">
-        <span className="text-sm font-bold">{title}</span>
-        <span className="text-xs">{date}</span>
+        <span className="text-sm font-bold">{movie.title}</span>
+        <span className="text-xs">{movie.releaseDate}</span>
       </CardFooter>
     </Card>
   );
