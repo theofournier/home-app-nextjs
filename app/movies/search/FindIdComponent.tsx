@@ -1,18 +1,7 @@
 "use client";
 
+import { Button, Card, CardBody, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, useDisclosure } from "@nextui-org/react";
 import React from "react";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from "@nextui-org/modal";
-import { Input } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody } from "@nextui-org/card";
-import { Select, SelectItem } from "@nextui-org/select";
 
 const externalSources = [
   "imdb_id",

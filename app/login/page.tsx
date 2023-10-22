@@ -1,10 +1,8 @@
 import { getSession } from "@/lib/supabase-server";
-import { Card, CardBody } from "@nextui-org/card";
-import { Button } from "@nextui-org/button";
 import { redirect } from "next/navigation";
-import { Input } from "@nextui-org/input";
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { Button, Card, CardBody, Input } from "@nextui-org/react";
 
 export default async function Login() {
   const session = await getSession();

@@ -2,8 +2,7 @@ import { MovieGrid } from "@/components/MovieGrid";
 import { MovieSectionTitle } from "@/components/MovieSectionTitle";
 import { getUserMovieFavorites } from "@/lib/supabase-server";
 import { MovieType } from "@/lib/types";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody } from "@nextui-org/card";
+import { Button, Card, CardBody } from "@nextui-org/react";
 import Link from "next/link";
 
 export default async function Movies() {

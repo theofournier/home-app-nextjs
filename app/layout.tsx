@@ -7,11 +7,8 @@ import { Clock } from "@/components/Clock";
 import Image from "next/image";
 import NextLink from "next/link";
 import { Providers } from "./providers";
-import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
 import { getSession } from "@/lib/supabase-server";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Button, Navbar, NavbarContent, NavbarItem, Tooltip, Link } from "@nextui-org/react";
 
 //export const revalidate = 0;
 

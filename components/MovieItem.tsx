@@ -1,5 +1,5 @@
 import { MovieType } from "@/lib/types";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import NextImage from "next/image";
 import { MovieFavorite } from "./MovieFavorite";
 import { MovieWatch } from "./MovieWatch";

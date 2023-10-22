@@ -8,7 +8,7 @@ import {
 } from "@/lib/types";
 import { MovieGrid } from "@/components/MovieGrid";
 import Image from "next/image";
-import { Input } from "@nextui-org/input";
+import { Input } from "@nextui-org/react";
 import { SearchIcon } from "@/components/SearchIcon";
 import { redirect } from "next/navigation";
 import { FindIdComponent } from "./FindIdComponent";
