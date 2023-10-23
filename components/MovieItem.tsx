@@ -14,7 +14,7 @@ export const MovieItem = ({ movie }: Props) => {
   return (
     <Card
       isBlurred
-      className="bg-transparent w-[200px] mx-auto"
+      className="bg-transparent w-[150px]"
       shadow="sm"
       key={movie.id}
     >
@@ -24,7 +24,7 @@ export const MovieItem = ({ movie }: Props) => {
           <MovieWatch movie={movie} />
         </div>
       </CardHeader>
-      <CardBody className="p-0 h-[300px] justify-center items-center">
+      <CardBody className="p-0 h-[200px] justify-center items-center">
         {movie.imageUrl ? (
           <NextImage
             alt={movie.title ?? "Movie image"}
@@ -32,7 +32,7 @@ export const MovieItem = ({ movie }: Props) => {
             fill
             sizes="100vw"
             style={{
-              objectFit: "fill",
+              objectFit: "cover",
             }}
           />
         ) : (
@@ -46,7 +46,7 @@ export const MovieItem = ({ movie }: Props) => {
         rel="noopener noreferrer"
         className="flex flex-col items-start p-2"
       >
-        <span className="text-sm font-bold">{movie.title}</span>
+        <span className="text-sm font-medium line-clamp-2">{movie.title}</span>
         <span className="text-xs">{movie.releaseDate}</span>
       </CardFooter>
     </Card>

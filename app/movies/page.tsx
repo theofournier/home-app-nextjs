@@ -37,9 +37,9 @@ export default async function Movies() {
     <div className="flex flex-col gap-4">
       <div className="flex">
         <Card isBlurred shadow="sm">
-          <CardBody>
+          <CardBody  className="p-2">
             <div className="flex gap-2 items-center flex-wrap">
-              <span className="text-lg font-medium">
+              <span className="text-medium font-medium">
                 Looking for new movies or TV series to watch?
               </span>
               <Button as={Link} href="/movies/search" color="primary">
@@ -59,11 +59,11 @@ export default async function Movies() {
             <MovieSectionTitle title="Watchlist" />
             <MovieGrid movies={groupMovies?.favorites} />
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <MovieSectionTitle title="Already watched" />
             <MovieGrid movies={groupMovies?.watched} />
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <MovieSectionTitle title="Removed" />
             <MovieGrid movies={groupMovies?.others} />
           </div>

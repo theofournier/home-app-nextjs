@@ -8,7 +8,7 @@ import {
 } from "@/lib/types";
 import { MovieGrid } from "@/components/MovieGrid";
 import Image from "next/image";
-import { Input } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import { SearchIcon } from "@/components/SearchIcon";
 import { redirect } from "next/navigation";
 import { FindIdComponent } from "./FindIdComponent";
@@ -101,8 +101,8 @@ export default async function Search({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="sticky top-16 z-10 flex">
-        <div className="flex flex-col flex-grow">
+      <div className="sticky top-16 z-10 flex flex-wrap-reverse gap-2">
+        <div className="flex flex-col">
           <form action={search}>
             <Input
               size="lg"
@@ -112,6 +112,16 @@ export default async function Search({
               defaultValue={searchQuery}
               startContent={
                 <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+              }
+              endContent={
+                <Button
+                  type="submit"
+                  radius="full"
+                  variant="flat"
+                  color="secondary"
+                >
+                  Search
+                </Button>
               }
             />
           </form>
@@ -130,7 +140,7 @@ export default async function Search({
             </a>
           </div>
         </div>
-        <div className="ml-2">
+        <div>
           <FindIdComponent
             findIdAction={findId}
             externalId={externalId}

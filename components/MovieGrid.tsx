@@ -7,10 +7,7 @@ type Props = {
 
 export const MovieGrid = ({ movies }: Props) => {
   return (
-    <div
-      className="gap-2 grid items-center"
-      style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}
-    >
+    <div className="flex flex-row flex-wrap gap-x-4 gap-y-2">
       {movies.map((movie) => (
         <MovieItem key={movie.id} movie={movie} />
       ))}
