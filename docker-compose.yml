@@ -7,11 +7,8 @@ services:
     working_dir: /app
     networks:
       - caddy_default
-      - home-app-nextjs_default
 
 networks:
   caddy_default:
     name: caddy_default
     external: true
-  home-app-nextjs_default:
-    name: home-app-nextjs_default
