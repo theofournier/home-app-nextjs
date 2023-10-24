@@ -4,8 +4,8 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { Database } from "@/lib/supabase.schema";
 import { MovieType } from "@/lib/types";
-import { CheckCircleOutline } from "./CheckCircleOutline";
-import { CheckCircle } from "./CheckCircle";
+import { CheckCircleOutlineIcon } from "../icons/CheckCircleOutlineIcon";
+import { CheckCircleIcon } from "../icons/CheckCircleIcon";
 
 type Props = {
   isWatched: boolean;
@@ -67,7 +67,7 @@ export const MovieWatchButton = ({ isWatched, movie }: Props) => {
         aria-label="Watch"
         size="sm"
       >
-        {isWatched ? <CheckCircle /> : <CheckCircleOutline />}
+        {isWatched ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
       </Button>
     </form>
   );

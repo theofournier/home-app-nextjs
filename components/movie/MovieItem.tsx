@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import NextImage from "next/image";
 import { MovieFavorite } from "./MovieFavorite";
 import { MovieWatch } from "./MovieWatch";
-import { ImageOffOutline } from "./ImageOffOutline";
+import { ImageOffOutlineIcon } from "../icons/ImageOffOutlineIcon";
 import Link from "next/link";
 
 type Props = {
@@ -36,7 +36,7 @@ export const MovieItem = ({ movie }: Props) => {
             }}
           />
         ) : (
-          <ImageOffOutline width={50} height={50} />
+          <ImageOffOutlineIcon width={50} height={50} />
         )}
       </CardBody>
       <CardFooter

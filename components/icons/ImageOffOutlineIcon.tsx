@@ -1,4 +1,4 @@
-export function ImageOffOutline(props: React.SVGProps<SVGSVGElement>) {
+export function ImageOffOutlineIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"

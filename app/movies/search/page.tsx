@@ -6,10 +6,10 @@ import {
   TmdbListResponse,
   TmdbResult,
 } from "@/lib/types";
-import { MovieGrid } from "@/components/MovieGrid";
+import { MovieGrid } from "@/components/movie/MovieGrid";
 import Image from "next/image";
 import { Button, Input } from "@nextui-org/react";
-import { SearchIcon } from "@/components/SearchIcon";
+import { SearchIcon } from "@/components/icons/SearchIcon";
 import { redirect } from "next/navigation";
 import { FindIdComponent } from "./FindIdComponent";
 
@@ -62,7 +62,7 @@ const getMovies = async (
     }));
 };
 
-export default async function Search({
+export default async function SearchPage({
   searchParams,
 }: {
   searchParams: SearchParams;

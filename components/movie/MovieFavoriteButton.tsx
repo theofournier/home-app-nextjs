@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import { HeartIcon } from "./HeartIcon";
+import { HeartIcon } from "../icons/HeartIcon";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";

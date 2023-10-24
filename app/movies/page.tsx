@@ -1,5 +1,5 @@
-import { MovieGrid } from "@/components/MovieGrid";
-import { MovieSectionTitle } from "@/components/MovieSectionTitle";
+import { MovieGrid } from "@/components/movie/MovieGrid";
+import { MovieSectionTitle } from "@/components/movie/MovieSectionTitle";
 import { getUserMovieFavorites } from "@/lib/supabase-server";
 import { MovieType } from "@/lib/types";
 import { Button, Card, CardBody } from "@nextui-org/react";

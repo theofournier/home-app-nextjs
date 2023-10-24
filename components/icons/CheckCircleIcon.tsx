@@ -1,5 +1,5 @@
 import React from "react";
-export const CheckCircle = ({ size = 20 }: { size?: number }) => (
+export const CheckCircleIcon = ({ size = 20 }: { size?: number }) => (
   <svg
     aria-hidden="true"
     fill={"currentColor"}
