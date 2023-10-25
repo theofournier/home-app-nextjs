@@ -12,12 +12,7 @@ type Props = {
 
 export const MovieItem = ({ movie }: Props) => {
   return (
-    <Card
-      isBlurred
-      className="bg-transparent w-[150px]"
-      shadow="sm"
-      key={movie.id}
-    >
+    <Card className="bg-background/80 w-[150px]" shadow="sm" key={movie.id}>
       <CardHeader className="absolute z-10 justify-end p-0">
         <div className="flex flex-row  gap-1 bg-background/50 p-2 rounded-es-lg">
           <MovieFavorite movie={movie} />

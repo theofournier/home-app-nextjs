@@ -1,3 +1,5 @@
+export type MediaType = "movie" | "tv" | string;
+
 export type TmdbResult = {
   id: number;
   title?: string; // movie
@@ -5,7 +7,7 @@ export type TmdbResult = {
   first_air_date?: string; // tv
   release_date?: string; // movie
   poster_path?: string;
-  media_type: "movie" | "tv";
+  media_type: MediaType;
 };
 
 export type TmdbListResponse = {
@@ -32,7 +34,7 @@ export type TmdbImageSize =
 export type MovieType = {
   id: number;
   imageUrl?: string | null;
-  mediaType: string;
+  mediaType: MediaType;
   releaseDate: string;
   title: string;
 };

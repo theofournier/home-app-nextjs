@@ -1,6 +1,17 @@
 "use client";
 
-import { Button, Card, CardBody, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, useDisclosure } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Select,
+  SelectItem,
+  useDisclosure,
+} from "@nextui-org/react";
 import React from "react";
 
 const externalSources = [
@@ -29,13 +40,9 @@ export const FindIdComponent = ({
 
   return (
     <>
-      <Card isBlurred shadow="sm">
-        <CardBody className="p-2">
-          <Button onPress={onOpen} color="primary">
-            Looking for a specific ID
-          </Button>
-        </CardBody>
-      </Card>
+      <Button onPress={onOpen} color="primary">
+        Specific ID
+      </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

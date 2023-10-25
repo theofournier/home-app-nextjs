@@ -12,5 +12,5 @@ export default async function MoviesLayout({
     return redirect("/login");
   }
 
-  return <div className="px-5 sm:px-10 py-4">{children}</div>;
+  return <div className="h-full px-5 sm:px-10 py-4 backdrop-blur-md backdrop-saturate-150">{children}</div>;
 }

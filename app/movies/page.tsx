@@ -1,5 +1,4 @@
 import { MovieGrid } from "@/components/movie/MovieGrid";
-import { MovieSectionTitle } from "@/components/movie/MovieSectionTitle";
 import { getUserMovieFavorites } from "@/lib/supabase-server";
 import { MovieType } from "@/lib/types";
 import { Button, Card, CardBody } from "@nextui-org/react";
@@ -36,8 +35,8 @@ export default async function Movies() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex">
-        <Card isBlurred shadow="sm">
-          <CardBody  className="p-2">
+        <Card shadow="sm" className="bg-background/80">
+          <CardBody className="p-2">
             <div className="flex gap-2 items-center flex-wrap">
               <span className="text-medium font-medium">
                 Looking for new movies or TV series to watch?
@@ -54,20 +53,18 @@ export default async function Movies() {
           <span>No favorites</span>
         </div>
       ) : (
-        <>
-          <div className="flex flex-col gap-2">
-            <MovieSectionTitle title="Watchlist" />
-            <MovieGrid movies={groupMovies?.favorites} />
-          </div>
-          <div className="flex flex-col gap-2">
-            <MovieSectionTitle title="Already watched" />
-            <MovieGrid movies={groupMovies?.watched} />
-          </div>
-          <div className="flex flex-col gap-2">
-            <MovieSectionTitle title="Removed" />
-            <MovieGrid movies={groupMovies?.others} />
-          </div>
-        </>
+        <div className="flex flex-col gap-4">
+          {Object.entries(groupMovies).map(([key, value]) => (
+            <div key={key} className="flex flex-col gap-2">
+              <div className="flex">
+                <div className="rounded-full px-14 py-2 bg-primary/80 text-center">
+                  <span className="text-xl font-semibold">{key}</span>
+                </div>
+              </div>
+              {value && <MovieGrid movies={value} />}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

@@ -33,7 +33,8 @@ export const getUserMovieFavorites = cache(async () => {
   const { data, error } = await supabase
     .from("movie_favorites")
     .select("*")
-    .eq("user_id", session.user.id);
+    .eq("user_id", session.user.id)
+    .order("created_at", { ascending: false });
 
   if (error) {
     return null;

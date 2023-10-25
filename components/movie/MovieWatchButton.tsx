@@ -63,7 +63,7 @@ export const MovieWatchButton = ({ isWatched, movie }: Props) => {
       <Button
         type="submit"
         isIconOnly
-        color="secondary"
+        color="success"
         aria-label="Watch"
         size="sm"
       >
