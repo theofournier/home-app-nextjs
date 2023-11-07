@@ -10,7 +10,7 @@ import { Providers } from "./providers";
 import { getSession } from "@/lib/supabase-server";
 import { Button, Navbar, NavbarContent, NavbarItem, Tooltip, Link } from "@nextui-org/react";
 
-//export const revalidate = 0;
+export const revalidate = 60;
 
 const unsplash = createApi({
   accessKey: process.env.UNSPLASH_API_KEY,
