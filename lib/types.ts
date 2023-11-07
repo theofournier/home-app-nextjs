@@ -1,3 +1,5 @@
+import { Database } from "./supabase.schema";
+
 export type MediaType = "movie" | "tv" | string;
 
 export type TmdbResult = {
@@ -40,3 +42,9 @@ export type MovieType = {
 };
 
 export type SearchParams = { [key: string]: string | string[] | undefined };
+
+export type WatchStatus = Database["public"]["Enums"]["watch_status"];
+
+export const isOfTypeWatchStatus = (status: string): status is WatchStatus => {
+  return ["watchlist", "watching", "watched"].includes(status);
+};

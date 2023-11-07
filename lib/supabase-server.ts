@@ -34,7 +34,7 @@ export const getUserMovieFavorites = cache(async () => {
     .from("movie_favorites")
     .select("*")
     .eq("user_id", session.user.id)
-    .order("created_at", { ascending: false });
+    .order("title", { ascending: true });
 
   if (error) {
     return null;

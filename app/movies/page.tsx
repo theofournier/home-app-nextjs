@@ -12,25 +12,31 @@ export default async function Movies() {
     releaseDate: movie.release_date,
     title: movie.title,
     isFavorite: movie.is_favorite,
-    isWatched: movie.is_watched,
+    status: movie.status,
   }));
 
-  const groupMovies = movieFavorites?.reduce<{
-    favorites: MovieType[];
-    watched: MovieType[];
-    others: MovieType[];
-  }>(
-    (group, current) => {
-      if (current.isFavorite && !current.isWatched) {
-        return { ...group, favorites: [...group.favorites, current] };
-      }
-      if (current.isWatched) {
-        return { ...group, watched: [...group.watched, current] };
-      }
-      return { ...group, others: [...group.others, current] };
-    },
-    { favorites: [], watched: [], others: [] }
-  );
+  const groupMovies = movieFavorites
+    ?.sort((a, b) => (a.isFavorite ? -1 : 1))
+    .reduce<{
+      watchlist: MovieType[];
+      watching: MovieType[];
+      watched: MovieType[];
+      other: MovieType[];
+    }>(
+      (group, current) => {
+        if (current.status === "watchlist") {
+          return { ...group, watchlist: [...group.watchlist, current] };
+        }
+        if (current.status === "watching") {
+          return { ...group, watching: [...group.watching, current] };
+        }
+        if (current.status === "watched") {
+          return { ...group, watched: [...group.watched, current] };
+        }
+        return { ...group, other: [...group.other, current] };
+      },
+      { watchlist: [], watching: [], watched: [], other: [] }
+    );
 
   return (
     <div className="flex flex-col gap-4">

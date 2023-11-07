@@ -1,21 +1,21 @@
 import { MovieType } from "@/lib/types";
 import { getUserMovieFavorites } from "@/lib/supabase-server";
-import { MovieWatchButton } from "./MovieWatchButton";
+import { MovieWatchStatusButton } from "./MovieWatchStatusButton";
 
 type Props = {
   movie: MovieType;
 };
 
-export const MovieWatch = async ({ movie }: Props) => {
+export const MovieWatchStatus = async ({ movie }: Props) => {
   const movieFavorites = await getUserMovieFavorites();
 
   return (
-    <MovieWatchButton
+    <MovieWatchStatusButton
       movie={movie}
-      isWatched={Boolean(
+      status={
         movieFavorites?.find((favorite) => favorite.movie_id === movie.id)
-          ?.is_watched
-      )}
+          ?.status
+      }
     />
   );
 };

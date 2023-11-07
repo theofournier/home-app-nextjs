@@ -2,7 +2,7 @@ import { MovieType } from "@/lib/types";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import NextImage from "next/image";
 import { MovieFavorite } from "./MovieFavorite";
-import { MovieWatch } from "./MovieWatch";
+import { MovieWatchStatus } from "./MovieWatchStatus";
 import { ImageOffOutlineIcon } from "../icons/ImageOffOutlineIcon";
 import Link from "next/link";
 
@@ -13,12 +13,6 @@ type Props = {
 export const MovieItem = ({ movie }: Props) => {
   return (
     <Card className="bg-background/80 w-[150px]" shadow="sm" key={movie.id}>
-      <CardHeader className="absolute z-10 justify-end p-0">
-        <div className="flex flex-row  gap-1 bg-background/50 p-2 rounded-es-lg">
-          <MovieFavorite movie={movie} />
-          <MovieWatch movie={movie} />
-        </div>
-      </CardHeader>
       <CardBody className="p-0 h-[200px] justify-center items-center">
         {movie.imageUrl ? (
           <NextImage
@@ -43,6 +37,10 @@ export const MovieItem = ({ movie }: Props) => {
       >
         <span className="text-sm font-medium line-clamp-2">{movie.title}</span>
         <span className="text-xs">{movie.releaseDate}</span>
+        <div className="flex flex-row gap-1 mt-1">
+          <MovieFavorite movie={movie} />
+          <MovieWatchStatus movie={movie} />
+        </div>
       </CardFooter>
     </Card>
   );

@@ -15,10 +15,10 @@ export interface Database {
           id: string;
           image_url: string | null;
           is_favorite: boolean;
-          is_watched: boolean;
           media_type: string;
           movie_id: number;
           release_date: string;
+          status: Database["public"]["Enums"]["watch_status"] | null;
           title: string;
           user_id: string;
         };
@@ -27,10 +27,10 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           is_favorite?: boolean;
-          is_watched?: boolean;
           media_type: string;
           movie_id: number;
           release_date: string;
+          status?: Database["public"]["Enums"]["watch_status"] | null;
           title: string;
           user_id: string;
         };
@@ -39,10 +39,10 @@ export interface Database {
           id?: string;
           image_url?: string | null;
           is_favorite?: boolean;
-          is_watched?: boolean;
           media_type?: string;
           movie_id?: number;
           release_date?: string;
+          status?: Database["public"]["Enums"]["watch_status"] | null;
           title?: string;
           user_id?: string;
         };
@@ -50,6 +50,7 @@ export interface Database {
           {
             foreignKeyName: "movie_favorites_user_id_fkey";
             columns: ["user_id"];
+            isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
           }
@@ -63,7 +64,7 @@ export interface Database {
       [_ in never]: never;
     };
     Enums: {
-      [_ in never]: never;
+      watch_status: "watchlist" | "watching" | "watched";
     };
     CompositeTypes: {
       [_ in never]: never;
